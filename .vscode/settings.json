@@ -1,0 +1,7 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./DepthDealer/Cargo.toml",
+        "./DepthDealer/Cargo.toml"
+    ],
+    "rust-analyzer.showUnlinkedFileNotification": false
+}
