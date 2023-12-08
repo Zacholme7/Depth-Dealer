@@ -1,0 +1,41 @@
+src
+    - model
+        - instrument
+            - kind.rs 
+            --------------
+            This file has to do with defiining the InstrumentKind enum. This enum reprsents the different types of instruments that we can trade.
+            This file has it implemented for Spot, Future, Perpetual, and Options.
+            This is not very implmentation heavy. There is the display method implemented for all of the instruments and the futures and options contract further define structs.
+            For the futures struct, all we are doing is defining the expiry. For the options struct, we are defining the type (call, put) the type of exercise the expirty and the strike price
+            Overall this is a very simple file and the main takeaway is that we have an InstrumentKind enum of type {Spot, Future, Perpetual, Options} and that the Future and Options types have some extra fields.
+            --------------
+            - mod.rs
+            --------------
+            This file brings together InstrumetnKind from kind.rs and symbol from symbol.rs to define an Instrument that we want to The instrument holds a Symbol for the base pair and the quote pair and 
+            the instrument kind that we want to trade. Refer to the symbol.rs file and the kind.rs file. In terms of methods, we implement the display, from/into, constructor and testcases that will test that we can
+            properly deserialize and serlialize an instrument.
+            The main takeaway from this file is that there is an instrument stuct that represents all the information on the instrument that we want to trade
+            --------------
+            - symbol.rs
+            --------------
+            This file has to do with defining the symbol type. All a symbol is is a string. Within this file we have methods for displaying the symbol, deserializing the symbol,
+            converting to and from the symbol and constructing the symbol .
+            The main takeaway from this file is a Symbol struct which just represents a symbol that we want to trade
+            --------------
+        - mod.rs
+        --------------
+        This is the file that wraps together all of the instrument class. The main thing in this file is defining the market structure. This market structure takes
+        an exchange that is defined in this file and an instrument that was defiend in the previous file (instruemtn/mod.rs). Inside this funtion, we implement
+        from functions and constructors.  there is a marekt id taht is said to be the unique reprsentation of a string, a subscription id that identifies a 
+        stream that has been subscribed to and a enum that represents the buy and the sell side. There is also tests that tests all of the deserialization functionality.
+        --------------
+    --------------
+    The main point of this file is to describe the data models that we want to use. There is the high level Market structure that contains an Exchange 
+    and an instrument. There are various other data members that are used for various information. 
+    --------------
+    - protocol
+    - error.rs
+    --------------
+    All socketIO errors that can be generated
+    --------------
+    - lib.rs
