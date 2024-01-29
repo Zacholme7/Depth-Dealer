@@ -3,10 +3,8 @@ use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use std::fmt::{Display, Formatter};
 
-/// Defines the type of [`Instrument`](super::Instrument) which is being traded on a
-/// given `base_quote` market.
-#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Debug, Deserialize, Serialize)]
-#[serde(rename_all = "snake_case")]
+
+/// Defines the type of [`Instrument`](super::Instrument) which is being traded on a given `base_quote` market.
 pub enum InstrumentKind {
     Spot,
     Future(FutureContract),
@@ -14,17 +12,18 @@ pub enum InstrumentKind {
     Option(OptionContract),
 }
 
-// Default the kind of the instrument to spot
 impl Default for InstrumentKind {
     fn default() -> Self {
         Self::Spot
     }
 }
 
-// Implement display trait for the kind of the instrument
 impl Display for InstrumentKind {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", match self {
+        write!(
+            f,
+            "{}",
+            match self {
                 InstrumentKind::Spot => "spot".to_string(),
                 InstrumentKind::Future(future) =>
                     format!("future_{}-UTC", future.expiry.date_naive()),
@@ -34,7 +33,7 @@ impl Display for InstrumentKind {
                     option.kind,
                     option.exercise,
                     option.expiry.date_naive(),
-                    option.strike,
+                    option.strike
                 ),
             }
         )
@@ -83,12 +82,11 @@ impl Display for OptionKind {
 
 /// [`OptionContract`] exercise style.
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Deserialize, Serialize)]
-#[serde(rename_all = "lowercase")]
 pub enum OptionExercise {
     #[serde(alias = "AMERICAN", alias = "American")]
     American,
-    #[serde(alias = "BERMUDAN", alias = "Bermudan")]
-    Bermudan,
+    #[serde(alias = "BERMUDA", alias = "Bermuda")]
+    Bermuda,
     #[serde(alias = "EUROPEAN", alias = "European")]
     European,
 }
@@ -100,7 +98,7 @@ impl Display for OptionExercise {
             "{}",
             match self {
                 OptionExercise::American => "american",
-                OptionExercise::Bermudan => "bermudan",
+                OptionExercise::Bermuda => "bermuda",
                 OptionExercise::European => "european",
             }
         )
