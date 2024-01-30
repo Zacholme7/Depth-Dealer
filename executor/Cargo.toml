@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 integration = { path = "../integration" }
+pin-project = "1.1.4"

@@ -5,6 +5,8 @@ use std::fmt::{Display, Formatter};
 
 
 /// Defines the type of [`Instrument`](super::Instrument) which is being traded on a given `base_quote` market.
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Deserialize, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum InstrumentKind {
     Spot,
     Future(FutureContract),
@@ -85,8 +87,8 @@ impl Display for OptionKind {
 pub enum OptionExercise {
     #[serde(alias = "AMERICAN", alias = "American")]
     American,
-    #[serde(alias = "BERMUDA", alias = "Bermuda")]
-    Bermuda,
+    #[serde(alias = "BERMUDAN", alias = "Bermudan")]
+    Bermudan,
     #[serde(alias = "EUROPEAN", alias = "European")]
     European,
 }
@@ -98,7 +100,7 @@ impl Display for OptionExercise {
             "{}",
             match self {
                 OptionExercise::American => "american",
-                OptionExercise::Bermuda => "bermuda",
+                OptionExercise::Bermudan => "bermuda",
                 OptionExercise::European => "european",
             }
         )
