@@ -206,6 +206,7 @@ mod tests {
         ];
 
         for (index, test) in cases.into_iter().enumerate() {
+            //let actual = serde_json::from_str::<Market>(test.input);
             let actual = serde_json::from_str::<Market>(test.input);
 
             match (actual, test.expected) {

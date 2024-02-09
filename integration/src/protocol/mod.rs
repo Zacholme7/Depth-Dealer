@@ -4,6 +4,8 @@ use serde::de::DeserializeOwned;
 
 pub mod websocket;
 
+// The stream parser part of the exchange stream
+// anything that implements this trait will take in messange and praseit into a result
 pub trait StreamParser {
     type Stream: Stream;
     type Message;

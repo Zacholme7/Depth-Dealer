@@ -1,9 +1,13 @@
 use serde::{Deserialize, Deserializer, Serialize};
 use std::fmt::{Debug, Display, Formatter};
 
+/// Represents an individiaul symbol
+/// Ex: "btc", "etc", ...
 #[derive(Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize)]
 pub struct Symbol(String);
 
+
+// Implement the Debug and Display for easy printing
 impl Debug for Symbol {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
@@ -15,6 +19,8 @@ impl Display for Symbol {
         write!(f, "{}", self.0)
     }
 }
+
+
 
 impl AsRef<str> for Symbol {
     fn as_ref(&self) -> &str {
@@ -31,6 +37,8 @@ impl<'de> Deserialize<'de> for Symbol {
     }
 }
 
+// From (Into<String>) to Symbol
+// Allow for the coversion from anything that can be converted into a string (String, &str) into a symbol
 impl<S> From<S> for Symbol
 where
     S: Into<String>,
